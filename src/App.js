@@ -1,25 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+import './App.css';
+import { Component } from 'react';
+
+import BookList from './components/BookList';
+import BookInput from './components/BookInput';
+
+class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      books: []
+    };
+  }
+
+  onBookAdded(book) {
+    this.state.books.push(book);
+    this.setState({
+      books: this.state.books
+    });
+  }
+
+  render() {
+    return (
+      <div className="container mt-4 p-4">
+
+        <div className="text-left">
+          <h1>Add Book:</h1>
+        </div>
+
+        <BookInput
+          addBook={(book) => this.onBookAdded(book)}
+        />
+
+        <div className="spacer"></div>
+
+        <BookList className="bookList" books={this.state.books} />
+
+      </div>
+    );
+  }
 }
 
 export default App;
