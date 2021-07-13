@@ -1,6 +1,7 @@
 
 
 import React, { Component } from 'react'
+import './BookList.css';
 
 export default class BookList extends Component {
   render() {
@@ -20,16 +21,32 @@ export default class BookList extends Component {
             {
               this.props.books.map(book => {
                 return <tr key={book.id}>
-                  <td>{book.title}</td>
-                  <td>{book.author}</td>
-                  <td>{book.isbn}</td>
-                  <td></td>
+                  <td>
+                    <div className="pointer">
+                      {book.title}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="pointer">
+                      {book.author}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="pointer">
+                      {book.isbn}
+                    </div>
+                  </td>
+                  <td>
+                    <div className="trash"
+                    onClick={() => this.props.removeBook(book.id)}>
+                      <u>X</u>
+                    </div>
+                  </td>
                 </tr>
               })
             }
           </tbody>
         </table>
-
       </div>
     )
   }

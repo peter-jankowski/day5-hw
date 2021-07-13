@@ -11,16 +11,35 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    let booksString = localStorage.getItem('books');
+    booksString = booksString ? booksString : '[]';
+    const books = JSON.parse(booksString);
+
     this.state = {
-      books: []
+      books: books
     };
+  }
+
+  saveBooksState(books) {
+    this.setState({ books: books });
+    localStorage.setItem('books', JSON.stringify(books));
   }
 
   onBookAdded(book) {
     this.state.books.push(book);
-    this.setState({
-      books: this.state.books
-    });
+    this.saveBooksState(this.state.books);
+  }
+
+  updateBook(book) {
+    const updatedTaskArr = this.state.books.filter(b => b.id === book.id ? book : b);
+
+    this.saveBooksState(updatedTaskArr);
+  }
+
+  removeBook(bookId) {
+    const updatedTaskArr = this.state.books.filter(book => book.id !== bookId);
+
+    this.saveBooksState(updatedTaskArr);
   }
 
   render() {
@@ -37,8 +56,12 @@ class App extends Component {
 
         <div className="spacer"></div>
 
-        <BookList className="bookList" books={this.state.books} />
-
+        <BookList 
+          className="bookList" 
+          books={this.state.books}
+          updateBook={(book) => this.updateBook(book)} 
+          removeBook={(bookId) => this.removeBook(bookId)}
+        />
       </div>
     );
   }

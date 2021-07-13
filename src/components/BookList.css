@@ -1,0 +1,9 @@
+
+.pointer {
+  cursor: context-menu;
+}
+
+.trash {
+  color: lightskyblue;
+  cursor: pointer;
+}

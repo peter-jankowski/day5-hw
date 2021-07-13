@@ -39,7 +39,7 @@ export default class BookInput extends Component {
         <h6>Title</h6>
         <div className="input-group mb-3">
           <input
-            value={this.state.name}
+            value={this.state.title}
             onChange={(e) => this.onTitleChanged(e)}
             type="text"
             className="form-control"/>
