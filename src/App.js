@@ -31,7 +31,7 @@ class App extends Component {
   }
 
   updateBook(book) {
-    const updatedTaskArr = this.state.books.filter(b => b.id === book.id ? book : b);
+    const updatedTaskArr = this.state.books.map(b => b.id === book.id ? book : b);
 
     this.saveBooksState(updatedTaskArr);
   }
